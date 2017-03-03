@@ -28,6 +28,19 @@ public class Book {
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (year != book.year) return false;
+        return title != null ? title.equals(book.title) : book.title == null;
+
+    }
+
+
+    @Override
     public String toString(){
         return "Book{" +
                 "title='" + title + '\'' +

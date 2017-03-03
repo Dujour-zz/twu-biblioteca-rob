@@ -2,15 +2,17 @@ package com.twu.biblioteca.repository;
 
 import com.twu.biblioteca.entity.Book;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class BooksRepository {
 
-    private final List<Book> books;
+    private final ArrayList<Book> books;
 
-    public BooksRepository (){
+    public BooksRepository() {
         ArrayList<Book> booksArray = new ArrayList<>();
         booksArray.add(new Book("Lord of the Rings", "J.R.R.Tolkien", 1954, true));
         booksArray.add(new Book("For Whom the Bells Tolls", "Ernest Hemingway", 1915, true));
@@ -20,7 +22,19 @@ public class BooksRepository {
         this.books = booksArray;
     }
 
-    public List<Book> listAll(){
+    public ArrayList<Book> listAll() {
         return this.books;
     }
+
+    public ArrayList<Book> listAllAvailable() {
+        ArrayList<Book> availableBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getBookAvailabillity()) {
+                availableBooks.add(book);
+            }
+
+        }
+        return availableBooks;
+    }
+
 }
