@@ -9,20 +9,32 @@ import static org.junit.Assert.*;
 
 public class LibraryServiceTest {
 
-    private LibraryService libraryService;
-
-    @Before
-    public void setUp() throws Exception {
-        libraryService = new LibraryService(new BooksRepository()); //use mock!!!
-    }
-
 
     @Test
     public void shouldSuccessfullyCheckoutBook(){
+        LibraryService libraryService = new LibraryService(new BooksRepository());
+
         libraryService.checkout("Matilda");
+
 
         Book expectedBook = libraryService.findBook("Matilda").get();
         assertFalse(expectedBook.getBookAvailabillity());
+    }
+
+    @Test
+    public void shouldSuccessfullyReturnBook(){
+        LibraryService libraryService = new LibraryService(new BooksRepository());
+
+        Book expectedBook = libraryService.findBook("Lord of the Rings").get();
+        assertEquals(expectedBook.getBookAvailabillity(), false);
+
+        libraryService.returnBook("Lord of the Rings");
+
+        assertTrue(expectedBook.getBookAvailabillity());
+
+
+
+
     }
 
 }

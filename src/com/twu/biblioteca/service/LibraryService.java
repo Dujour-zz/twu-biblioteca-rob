@@ -25,4 +25,11 @@ public class LibraryService {
                     .findFirst();
     }
 
+    public void returnBook(String title){
+        Optional<Book> bookFound = findBook(title);
+        bookFound.ifPresent(book -> book.setBookAvailabillity(true));
+
+    }
+
+
 }
