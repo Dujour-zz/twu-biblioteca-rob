@@ -14,9 +14,17 @@ public class LibraryService {
         this.booksRepository = booksRepository;
     }
 
-    public void checkout(String title){
+    public boolean checkout(String title){
         Optional<Book> bookFound = findBook(title);
-        bookFound.ifPresent(book -> book.setBookAvailabillity(false));
+
+        boolean returnBoolean = false;
+        if(bookFound.isPresent()) {
+            bookFound.ifPresent(book -> book.setBookAvailabillity(false));
+            returnBoolean =  true;
+        }
+        return returnBoolean;
+
+
     }
 
     public Optional<Book> findBook(String title) {
@@ -25,9 +33,16 @@ public class LibraryService {
                     .findFirst();
     }
 
-    public void returnBook(String title){
+    public boolean returnBook(String title){
         Optional<Book> bookFound = findBook(title);
-        bookFound.ifPresent(book -> book.setBookAvailabillity(true));
+
+        boolean returnBoolean = false;
+        if(bookFound.isPresent()) {
+            bookFound.ifPresent(book -> book.setBookAvailabillity(true));
+            returnBoolean =  true;
+        }
+        return returnBoolean;
+
 
     }
 
